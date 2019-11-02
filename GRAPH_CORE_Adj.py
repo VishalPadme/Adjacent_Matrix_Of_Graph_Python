@@ -39,12 +39,23 @@ class graph:
                 print(self.adj[i][j],end="  ")
             print("")
 
+    def isPath(self, v1, v2):
+        l = [v1]
+        for v in l:
+            for i in range(self.size):
+                if ((self.adj[v][i] == 1 ) and (i not in l)):
+                    l.append(i)
+        if v2 in l:
+            return True
+        else:
+            return False
+
 #driver
 v=int(input("Enter The Number of Vertices: "))
 g=graph(v)
 print("MENU:\n\t[1] Add Edge\n\t[2] Remove Edge\n\t[3] Check Whether there is Edge Or not\n\t[4] Number Of Vertices\n\t[5] Display a")
 ch=int(input("Enter Your Choise: "))
-while(ch<6):
+while(ch<7):
     try:
 
         if (ch == 1):
@@ -67,13 +78,14 @@ while(ch<6):
             print("Number Of The Vertices In Graph := ",g.size)
         elif (ch==5):
             g.display()
+        elif (ch==6):
+            v1 = int(input("Enter Source Vertex : "))
+            v2 = int(input("Enter Destination Vertex: "))
+            if(g.isPath(v1,v2)):
+                print("There is a path between ",v1,"  & ",v2)
+            else:
+                print("There is No path between ", v1, "  & ", v2)
+
         ch = int(input("Enter Your Next Choise: "))
     except IndexError:
         print("!![Please Enter Valid Vertices]!!")
-
-
-
-
-
-
-
